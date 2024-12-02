@@ -18,7 +18,7 @@ module.exports = (_, argv) => ({
   },
 
   devServer: {
-    port: 8080,
+    port: 3001,
     historyApiFallback: true,
     watchFiles: [path.resolve(__dirname, 'src')],
     onListening: function (devServer) {
@@ -58,6 +58,14 @@ module.exports = (_, argv) => ({
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: "file-loader",
+          },
+        ],
+      },
     ],
   },
 
@@ -67,7 +75,7 @@ module.exports = (_, argv) => ({
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {
-        './Header': './src/components/Header.tsx'
+        './Header': './src/components/Header/Header.tsx'
       },
       shared: {
         ...deps,
