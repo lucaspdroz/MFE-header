@@ -2,6 +2,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
+
 const deps = require("./package.json").dependencies;
 
 const printCompilationMessage = require('./compilation.config.js');
@@ -17,7 +18,7 @@ module.exports = (_, argv) => ({
   },
 
   devServer: {
-    port: 3001,
+    port: 8080,
     historyApiFallback: true,
     watchFiles: [path.resolve(__dirname, 'src')],
     onListening: function (devServer) {
@@ -66,7 +67,7 @@ module.exports = (_, argv) => ({
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {
-        './Header': './src/components/Header.js'
+        './Header': './src/components/Header.tsx'
       },
       shared: {
         ...deps,
