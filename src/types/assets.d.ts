@@ -4,4 +4,4 @@ declare module '*.png' {
     export default content;
 }
 
-declare module 'host/store'
+declare module 'portal/store'

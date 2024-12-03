@@ -74,7 +74,7 @@ module.exports = (_, argv) => ({
       name: "header",
       filename: "remoteEntry.js",
       remotes: {
-        host: "host@https://portal-five-livid.vercel.app/remoteEntry.js",
+        portal: "portal@https://mfe-portal.vercel.app//remoteEntry.js",
       },
       exposes: {
         './Header': './src/components/Header/Header.tsx'
