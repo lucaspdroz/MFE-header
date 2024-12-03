@@ -35,6 +35,12 @@ jobs:
         with:
           node-version: '20'
 
+      - name: 'Create env file'
+        run: |
+          touch .env
+          echo  echo PROJECT_URL=https://lucaspdroz.github.io/MFE-header/ >> .env
+          cat .env
+
       - name: Install dependencies
         run: npm install
       
