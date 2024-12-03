@@ -73,7 +73,9 @@ module.exports = (_, argv) => ({
     new ModuleFederationPlugin({
       name: "header",
       filename: "remoteEntry.js",
-      remotes: {},
+      remotes: {
+        host: "host@https://portal-five-livid.vercel.app/remoteEntry.js",
+      },
       exposes: {
         './Header': './src/components/Header/Header.tsx'
       },
