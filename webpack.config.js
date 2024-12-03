@@ -2,6 +2,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
+
 const deps = require("./package.json").dependencies;
 
 const printCompilationMessage = require('./compilation.config.js');
@@ -9,7 +10,7 @@ const printCompilationMessage = require('./compilation.config.js');
 module.exports = (_, argv) => ({
   output: {
     path: path.resolve(__dirname, "dist"),
-    publicPath: process.env.NODE_ENV === 'production' ? process.env.PROJECT_URL : 'http://localhost:3001/',
+    publicPath: argv.mode !== 'development' ? process.env.PROJECT_URL : 'http://localhost:3001/',
   },
 
   resolve: {
@@ -57,6 +58,14 @@ module.exports = (_, argv) => ({
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: "file-loader",
+          },
+        ],
+      },
     ],
   },
 
@@ -66,7 +75,7 @@ module.exports = (_, argv) => ({
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {
-        './Header': './src/components/Header.js'
+        './Header': './src/components/Header/Header.tsx'
       },
       shared: {
         ...deps,
