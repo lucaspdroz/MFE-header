@@ -10,7 +10,7 @@ const printCompilationMessage = require('./compilation.config.js');
 module.exports = (_, argv) => ({
   output: {
     path: path.resolve(__dirname, "dist"),
-    publicPath: process.env.NODE_ENV === 'production' ? process.env.PROJECT_URL : 'http://localhost:3001/',
+    publicPath: argv.mode !== 'development' ? process.env.PROJECT_URL : 'http://localhost:3001/',
   },
 
   resolve: {
